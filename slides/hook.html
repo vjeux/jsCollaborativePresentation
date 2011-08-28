@@ -1,0 +1,72 @@
+
+<!-- Author of these slides:
+	Vjeux <vjeuxx@gmail.com> http://blog.vjeux.com/
+-->
+
+<div class="slide" id="hook-1">
+	<h2>Hook 1/3</h2>
+
+	<h3>Situation</h3>
+	<ul>
+		<li>Game in the browser.</li>
+		<li>For your damage charting extension, you want to watch the combat log.</li>
+		<li>The following code is part of the game:</li>
+	</ul>
+
+<pre>function ProcessChatMessage(message, source, channel) {
+  // ... Game Code ...
+}</pre>
+
+<div class="slide">
+	<h3>Ugly hack - Game Patching</h3>
+
+<pre>function ProcessChatMessage(message, source, channel) {
+<strong>  if (channel == COMBAT_LOG_CHANNEL) {
+    // ... Extension Code ...
+  }</strong>
+  // ... Game Code ...
+}</pre></div>
+</div>
+
+<div class="slide" id="hook-2">
+	<h2>Hook 2/3</h2>
+	
+	<div>
+		<h3>1 - Backup the function</h3>
+		<pre>var <strong>defaultProcessChatMessage = ProcessChatMessage</strong>;</pre>
+	</div>
+
+	<div class="slide">
+		<h3>2 - Override the function</h3>
+	
+<pre><strong>ProcessChatMessage = function</strong>(message, source, channel) {
+  if (channel == COMBAT_LOG_CHANNEL) {
+	// ... Extension Code ...
+  }</pre>
+
+	</div>
+
+	<div class="slide">
+		<h3>3 - Call the default code</h3>
+<pre>  <strong>defaultProcessChatMessage</strong>(message, source, channel);
+}</pre>
+	</div>
+</div>
+
+<div class="slide" id="hook-3">
+	<h2>Hook 3/3</h2>
+
+	<h3>Advantages</h3>
+
+	<ul>
+		<li>Target function does not need to be written in a special form.</li>
+		<li>Decentralized: Multiple hooks can be added independently.</li>
+		<li>No library required: Uses only basic Javascript.</li>
+	</ul>
+
+	<h3>More about this technique</h3>
+
+	<ul>
+		<li><a href="http://blog.vjeux.com/2011/javascript/hook.html">blog.vjeux.com/2011/javascript/hook.html</a></li>
+	</ul>
+</div>
