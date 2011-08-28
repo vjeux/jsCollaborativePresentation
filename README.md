@@ -12,9 +12,11 @@ This is why I would like to start an **experiment: Can we write together slides 
 
 The latest version of the presentation is available here:
 
-- http://vjeux.github.com/jsCollaborativePresentation/
+- **http://vjeux.github.com/jsCollaborativePresentation/**
 
-I will answer comments and questions on the [Hacker News thread](http://news.ycombinator.com/item?id=2933965). I will update my Twitter [@Vjeux](http://twitter.com/#!/Vjeux) with updates.
+I will answer comments and questions on the [Hacker News thread](http://news.ycombinator.com/item?id=2933965).
+I will update my Twitter [@Vjeux](http://twitter.com/#!/Vjeux) with updates. 
+If you have any question, vjeuxx@gmail.com is my mail, gtalk and msn address.
 
 ## What?
 
