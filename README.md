@@ -14,7 +14,7 @@ The latest version of the presentation is available here:
 
 - http://vjeux.github.com/jsCollaborativePresentation/
 
-I will answer comments and questions on the [Hacker News thread](...). Follow me on Twitter [@Vjeux](http://twitter.com/#!/Vjeux) for updates.
+I will answer comments and questions on the [Hacker News thread](...). I will update my Twitter [@Vjeux](http://twitter.com/#!/Vjeux) with updates.
 
 ## What?
 
