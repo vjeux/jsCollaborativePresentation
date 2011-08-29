@@ -62,6 +62,13 @@ Let's say you want to add a slide about memoization:
 
 You are done! Just give me some minutes to merge it with the live repo :)
 
+## Final Remarks
+
+  - The name of all the contributors will appear in the last slide.
+  - I will make the talk during September and record it. It will be in French. (I wish I could present it in English during the jsConf!)
+  - I'm pretty sure some people will ask what license the presentation is ... I have no idea, please suggest one :)
+  - I reserve the right to forge the final presentation as I wish. Sorry in advance if your slides are edited / not taken.
+
 ## Tools that power the presentation
   - [DeckJS](http://imakewebthings.github.com/deck.js/)
   - [jQuery](http://jquery.com/)
