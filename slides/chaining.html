@@ -1,0 +1,56 @@
+
+<!-- Author of these slides:
+  Vjeux <vjeuxx@gmail.com> http://blog.vjeux.com/
+-->
+
+<div class="slide" id="chaining-1">
+	<h2>Method Chaining 1/2</h2>
+
+	<h3>Easy Code</h3>
+<pre>$('a')
+  .addClass('external')
+  .attr('target', '_blank')
+  .click(function () { /* analytics call */ })</pre>
+
+<div class="slide">
+	<h3>Easy Implementation</h3>
+<pre>function Object() {}
+Object.prototype = {
+  method: function () {
+    // do something
+    <strong>return this;</strong>
+  }
+};
+
+var obj = new Object();
+<strong>obj.method().method();</strong></pre>
+</div>
+</div>
+
+<div class="slide" id="chaining-2">
+	<h2>Method Chaining 2/2</h2>
+
+	<h3>HTML Document Traversing</h3>
+
+<pre>$('li')        // li: List Item
+  .has('ul')   // ul: Unordered List
+  .eq(1)
+  .parent()</pre>
+
+<div class="slide">
+  <h3>SQL Query</h3>
+
+<pre>SQL.Select()
+  .field('*')
+  .table('users')
+  .limit(10)</pre>
+</div>
+<div class="slide">
+  <h3>Asynchronous Tasks</h3>
+
+<pre>$('&lt;div/>')
+  .fetch('navigation.html') // Asynchronous
+  .addClass('column')
+  .appendTo('#side')</pre>
+</div>
+</div>

@@ -1,0 +1,82 @@
+
+<!-- Author of these slides:
+  Vjeux <vjeuxx@gmail.com> http://blog.vjeux.com/
+-->
+
+<div class="slide" id="memoization-1">
+	<h2>Memoization 1/2</h2>
+
+<h3>Situation</h3>
+<ul>
+	<li>Twitter Application</li>
+	<li>Everytime you mouseover a username, a tooltip is displayed with more infos.</li>
+</ul>
+
+<pre>username.mouseover(function () {
+  displayTooltip(getUser(username.id));
+});</pre>
+
+<ul>
+	<li>You get user informations with an external request.</li>
+</ul>
+
+<pre>function getUser(id) {
+  // Fetch Request (Synchronous only for the example!)
+  return user;
+}</pre>
+
+<ul>
+	<li>If you mouseover twice the same user, there will be <strong>two</strong> requests!</li>
+</ul>
+
+</div>
+
+<div class="slide" id="memoization-2">
+	<h2>Memoization 2/3</h2>
+
+	<h3>Let's add a cache</h3>
+
+<pre><strong>var userCache = {};</strong>
+function getUser(id) {
+  <strong>if (id in userCache) {
+    return userCache[id];</strong>
+  }
+  // Fetch Request
+  <strong>userCache[id] = user;</strong>
+  return user;
+}</pre>
+
+	<h3>Global variables suck!</h3>
+
+<pre>var getUser = (function () {
+  var userCache = {};
+  return function (id) {
+    // ...
+  };
+})<strong>()</strong>;</pre>
+
+</div>
+
+<div class="slide" id="memoization-2">
+	<h2>Memoization 3/3</h2>
+<pre>Object.prototype.memoize = function () {
+  var cache = {};
+  var f = this;
+
+  return function (arg) {
+    if (!(arg in cache)) {
+      cache[arg] = f(arg);
+	}
+
+    return cache[arg];
+  };
+};</pre>
+
+</div>
+
+<!--
+
+Private Variables
+Prototype Extending
+
+-->

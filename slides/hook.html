@@ -31,26 +31,24 @@
 <div class="slide" id="hook-2">
 	<h2>Hook 2/3</h2>
 	
-	<div>
-		<h3>1 - Backup the function</h3>
-		<pre>var <strong>defaultProcessChatMessage = ProcessChatMessage</strong>;</pre>
-	</div>
+	<h3>1 - Backup the function</h3>
+	<pre>var <strong>defaultProcessChatMessage = ProcessChatMessage</strong>;</pre>
 
-	<div class="slide">
-		<h3>2 - Override the function</h3>
+<div class="slide">
+	<h3>2 - Override the function</h3>
 	
 <pre><strong>ProcessChatMessage = function</strong>(message, source, channel) {
   if (channel == COMBAT_LOG_CHANNEL) {
 	// ... Extension Code ...
   }</pre>
 
-	</div>
+</div>
 
-	<div class="slide">
-		<h3>3 - Call the default code</h3>
+<div class="slide">
+	<h3>3 - Call the default code</h3>
 <pre>  <strong>defaultProcessChatMessage</strong>(message, source, channel);
 }</pre>
-	</div>
+</div>
 </div>
 
 <div class="slide" id="hook-3">
