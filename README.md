@@ -28,6 +28,7 @@ The content:
 
   - Javascript, **the language**
   - Show what sexy we can do in Javascript compared to C++
+  - The presentation is composed of many design pattern presentations. Pick one you like and make a slide or two!
   - Examples of subjects: 
   [Continuation Passing Style](http://en.wikipedia.org/wiki/Continuation-passing_style), 
   [Memoization](http://en.wikipedia.org/wiki/Memoization), 
