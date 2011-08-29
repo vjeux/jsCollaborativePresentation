@@ -1,8 +1,9 @@
 #jsCollaborativePresentation
 
-I'm currently a student at [EPITA](http://epita.fr/). It's a computer science school with is a high focus on C and C++. 
+I, [Christopher Chedeau](http://blog.vjeux.com/) am currently a student at [EPITA](http://epita.fr/). 
+It's a computer science school with is a high focus on C and C++. 
 Many students feel that low-level C is the holy graal and web development, with its dynamic language Javascript,
-is only good for noobs. I am going to make a **1 hour conference** in order to prove them wrong.
+is only good for noobs. I am going to make a **1 hour conference** in order to prove them wrong!
 
 While I could go the standard way and write the slides myself, I believe that the spirit of the web is community. 
 This is why I would like to start an **experiment: Can we write together slides for a Javascript presentation?**
@@ -12,6 +13,8 @@ This is why I would like to start an **experiment: Can we write together slides 
 The latest version of the presentation is available here:
 
 - http://vjeux.github.com/jsCollaborativePresentation/
+
+I will answer comments and questions on the [Hacker News thread](...).
 
 ## What?
 
