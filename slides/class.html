@@ -1,0 +1,388 @@
+
+<!-- Author of these slides:
+	Vjeux <vjeuxx@gmail.com> http://blog.vjeux.com/
+-->
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Javascript Object Notation (JSON)</h3>
+
+	<pre>var point = {x: 51, y: 42};
+console.log(point.x, point.y);</pre>
+
+	<ul>
+		<li>Short notation.</li>
+		<li>Really useful for small structures.</li>
+		<li><strong>Next:</strong> Make a constructor.</li>
+	</ul>
+</div>
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Constructor attempt</h3>
+
+<pre>function Point(x, y) {
+	return {
+		x: x,
+		y: y,
+		print: function () {
+			console.log(<strong>?????</strong>.x, <strong>?????</strong>.y);
+</pre>
+
+	<ul>
+		<li><strong>Problem:</strong> Cannot self reference.</li>
+		<li><strong>Solution:</strong> Make a temporary variable.</li>
+	</ul>
+</div>
+
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Naive Constructor</h3>
+
+<pre>function Point(x, y) {
+	<strong>var point = {};</strong>
+	point.x = x;
+	point.y = y;
+	point.print = function () {
+		console.log(<strong>point</strong>.x, <strong>point</strong>.y);
+	};
+	<strong>return point;</strong>
+}
+
+var point = Point(51, 42);
+point.print();
+</pre>
+
+	<ul>
+		<li>Does what we want.</li>
+		<li><strong>Next:</strong> Less verbose using <code>new</code> operator.</li>
+	</ul>
+</div>
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3><code>new</code> Operator</h3>
+
+<pre>function Point(x, y) {
+	<strong>this</strong>.x = x;
+	<strong>this</strong>.y = y;
+	<strong>this</strong>.print = function () {
+		console.log(<strong>this</strong>.x, <strong>this</strong>.y);
+	};
+}
+
+var point = <strong>new</strong> Point(51, 42);
+point.print();
+</pre>
+
+	<ul>
+		<li><code>new</code> magically creates an empty object <code>this</code> and returns it at the end of the function.</li>
+		<li><strong>Next:</strong> Private variable.</li>
+	</ul>
+</div>
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Private variable</h3>
+
+<pre>function Point(x, y) {
+	this.x = x;
+	<strong>var y_ = y;</strong>
+	this.print = function () {
+		console.log(this.x, <strong>y_</strong>);
+	};
+}
+
+var point = new Point(51, 42);
+point.print();
+</pre>
+
+	<ul>
+		<li>We use a local variable instead of an object property.</li>
+		<li>As long as the <code>print</code> function lives, the variable <code>y_</code> exists thanks to the <strong>Closure</strong>.</li>
+		<li><strong>Caution:</strong> Technique to use with care:
+			<ul>
+				<li>Harder to debug as we can't inspect local variables.</li>
+				<li>More costly memory-wise to keep the closure.</li>
+				<li>Cannot integrate it with prototypal inheritance (next slide).</li>
+			</ul>
+		</li>
+		<li><strong>Next:</strong> Prototypal Inheritance.</li>
+	</ul>
+</div>
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Prototype</h3>
+
+<pre>function Point(x, y) {
+	this.x = x;
+	this.y = y;
+}
+<strong>
+Point.prototype = {
+	print: function () {
+		console.log(this.x, this.y);
+	}
+};
+</strong>
+var point = new Point(51, 42);
+point.print();
+</pre>
+
+	<ul>
+		<li>Functions are objects, you can add them properties.</li>
+		<li>Functions are objects, you can add them properties.</li>
+
+		<li><strong>Next:</strong> Prototypal Inheritance.</li>
+	</ul>
+
+
+</div>
+
+
+<style>
+table.prototype {
+	margin-bottom: 5px;
+}
+
+.prototype td, .prototype th {
+	border: 1px solid black;
+	padding: 5px;
+	text-align: center;
+	width: 100px;
+}
+
+.prototype td {
+	background-color: white;
+}
+
+.prototype th {
+	background-color: orange;
+}
+</style>
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Without Prototype</h3>
+
+
+	<h4>point</h4>
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>print</th>
+			<th>move</th>
+			<th>intersect</th>
+			<th>...</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>function</td>
+			<td>function</td>
+			<td>function</td>
+			<td>...</td>
+		</tr>
+	</table>
+
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>print</th>
+			<th>move</th>
+			<th>intersect</th>
+			<th>...</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>function</td>
+			<td>function</td>
+			<td>function</td>
+			<td>...</td>
+		</tr>
+	</table>
+
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>print</th>
+			<th>move</th>
+			<th>intersect</th>
+			<th>...</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>function</td>
+			<td>function</td>
+			<td>function</td>
+			<td>...</td>
+		</tr>
+	</table>
+
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>print</th>
+			<th>move</th>
+			<th>intersect</th>
+			<th>...</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>function</td>
+			<td>function</td>
+			<td>function</td>
+			<td>...</td>
+		</tr>
+	</table>
+
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>print</th>
+			<th>move</th>
+			<th>intersect</th>
+			<th>...</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>function</td>
+			<td>function</td>
+			<td>function</td>
+			<td>...</td>
+		</tr>
+	</table>
+
+	<ul>
+		<li><strong>Disadvantage</strong>: Memory expensive</li>
+		<li><strong>Disadvantage</strong>: Creation expensive: have to fill all the values</li>
+		<li><strong>Next</strong>: Prototypal approach</li>
+	</ul>
+</div>
+
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>With Prototype</h3>
+
+
+	<table style="width: 100%;">
+	<tr><td>
+
+	<h4>point</h4>
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>__proto__</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>Point.prototype</td>
+		</tr>
+	</table>
+
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>__proto__</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>Point.prototype</td>
+		</tr>
+	</table>
+
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>__proto__</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>Point.prototype</td>
+		</tr>
+	</table>
+
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>__proto__</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>Point.prototype</td>
+		</tr>
+	</table>
+
+	<table class="prototype">
+		<tr>
+			<th>x</th>
+			<th>y</th>
+			<th>__proto__</th>
+		</tr>
+		<tr>
+			<td>51</td>
+			<td>42</td>
+			<td>Point.prototype</td>
+		</tr>
+	</table>
+
+	</td><td>&nbsp;</td><td>
+	
+	<h4>Point.prototype</h4>
+	<table class="prototype">
+		<tr>
+			<th>print</th>
+			<th>move</th>
+			<th>intersect</th>
+			<th>...</th>
+			<th>__proto__</th>
+		</tr>
+		<tr>
+			<td>function</td>
+			<td>function</td>
+			<td>function</td>
+			<td>...</td>
+			<td>null</td>
+		</tr>
+	</table>
+
+	</td>
+	</tr>
+	</table>
+
+	<ul>
+		<li><strong>Disadvantage</strong>: Indirection on function call</li>
+		<li><strong>Advantage</strong>: Shared properties possible</li>
+		<li><strong>Next</strong>: Prototypal approach</li>
+	</ul>
+
+</div>
+

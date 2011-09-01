@@ -1,0 +1,131 @@
+
+
+<div class="slide">
+
+<h1>Pimp My Class with Helpers</h1>
+
+</div>
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Prototypal inheritance: Alternative way</h3>
+
+<pre>var Point = {
+	x: 51,
+	y: 42,
+	print: function () {
+		console.log(this.x, this.y);
+	}
+};
+
+var point = <strong>Object.create(Point);</strong>
+point.print();</pre>
+
+	<ul>
+		<li><strong>Object.create(proto)</strong>: Creates a new object setting the prototype.</li>
+		<li><strong>Next</strong>: Point3D?</li>
+	</ul>
+
+
+</div>
+
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Extensions</h3>
+
+<pre>var Point = {
+	x: 51,
+	y: 42,
+	print: function () {
+		console.log(this.x, this.y);
+	}
+};
+
+<strong>var Point3D = Object.create(Point);
+Point3D.z = 666;
+Point3D.print = function () {
+	console.log(this.x, this.y, this.z);
+}
+
+var point = Object.create(Point3D);</strong>
+point.print();</pre>
+
+	<ul>
+		<li>Object.create can also be used for multi-level inheritance</li>
+		<li><strong>Next</strong>: Annoying extension syntax</li>
+	</ul>
+
+</div>
+
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Extensions</h3>
+
+<pre>var Point = {
+	x: 51,
+	y: 42,
+	print: function () {
+		console.log(this.x, this.y);
+	}
+};
+
+var Point3D = <strong>Object.extend(</strong>Object.create(Point), <strong>{
+	z: 666,
+	print:</strong> function () {
+		console.log(this.x, this.y, this.z);
+	}
+});
+
+var point = Object.create(Point3D);
+point.print();</pre>
+
+</div>
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Class Framework: <a href="http://jsclass.jcoglan.com/">JS.Class</a></h3>
+
+<pre>var Point = <strong>new JS.Class({
+	initialize:</strong> function(x, y) {
+		this.x = x;
+		this.y = y;
+	},
+	print: function() {
+		console.log(this.x, this.y);
+	}
+});
+
+var Point3D = <strong>new JS.Class(Point</strong>, {
+	initialize: function(x, y, z) {
+		this.callSuper(x, y);
+		this.z = z;
+	},
+	print: function() {
+		console.log(this.x, this.y, this.z);
+	}
+});
+
+var point = <strong>new Point3D(</strong>42, 51, 666);
+point.print();</pre>
+
+</div>
+
+<div class="slide">
+	<h2>Class</h2>
+
+	<h3>Conclusion</h3>
+
+	<ul>
+		<li>Lisp Philosophy: Small core language extensible through libraries</li>
+		<li>Core language: Object, functions and prototypal inheritance</li>
+		<li>We provide: many ways to organize code</li>
+		<li>Classes are not frozen, you can extend them</li>
+	</ul>
+</div>
+
