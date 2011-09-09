@@ -23,7 +23,7 @@
 
   <!-- Modernizer & jQuery -->
   <script src="core/modernizr.custom.js"></script>
-  <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+  <script src="core/jquery-1.6.2.min.js"></script>
 </head>
 
 <body class="deck-container">
@@ -40,18 +40,33 @@ function include(url) {
   });
 }
 
-
-/* Add your slides here */
+/*
 include('slides/intro.html');
 include('slides/cheat.html');
+
+// 1) Structure du code : Les classes
 include('slides/class.html');
 include('slides/class.helpers.html');
+
+// 2) Systeme d'extension (extend, hook, memoize ...)
+include('slides/extend.html');
 include('slides/hook.html');
 include('slides/memoization.html');
+
+// 3) Faire une API : callbacks, type d'arguments, method chaining
 include('slides/chaining.html');
+include('slides/options.html');
 
 include('slides/addyour.html');
+*/
 </script>
+
+
+<div class="slide">
+  <h1>Javascript Rocks</h1>
+</div>
+
+
 
 
 <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
