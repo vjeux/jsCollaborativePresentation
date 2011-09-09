@@ -31,7 +31,6 @@
 <script>
 /* Synchronous include */
 function include(url) {
-  console && console.log('Including', url);
   $.ajax(url, {
     async: false,
     success: function (data) {
@@ -40,9 +39,7 @@ function include(url) {
   });
 }
 
-/*
 include('slides/intro.html');
-include('slides/cheat.html');
 
 // 1) Structure du code : Les classes
 include('slides/class.html');
@@ -53,18 +50,15 @@ include('slides/extend.html');
 include('slides/hook.html');
 include('slides/memoization.html');
 
-// 3) Faire une API : callbacks, type d'arguments, method chaining
-include('slides/chaining.html');
+// 3) Faire une API : callbacks, type d'arguments, method chaining, strings
 include('slides/options.html');
+include('slides/strings.html');
+include('slides/chaining.html');
 
+include('slides/conclusion.html');
 include('slides/addyour.html');
-*/
 </script>
 
-
-<div class="slide">
-  <h1>Javascript Rocks</h1>
-</div>
 
 
 

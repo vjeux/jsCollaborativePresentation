@@ -1,10 +1,6 @@
 
-<!-- Author of these slides:
-  Vjeux <vjeuxx@gmail.com> http://blog.vjeux.com/
--->
-
 <div class="slide">
-	<h2>Memoization 1/2</h2>
+	<h2>Memoization</h2>
 
 <h3>Situation</h3>
 <ul>
@@ -13,7 +9,7 @@
 </ul>
 
 <pre>username.mouseover(function () {
-  displayTooltip(getUser(username.id));
+	displayTooltip(getUser(username.id));
 });</pre>
 
 <ul>
@@ -21,8 +17,8 @@
 </ul>
 
 <pre>function getUser(id) {
-  // Fetch Request (Synchronous only for the example!)
-  return user;
+	// Fetch Request (Synchronous only for the example!)
+	return user;
 }</pre>
 
 <ul>
@@ -32,45 +28,84 @@
 </div>
 
 <div class="slide">
-	<h2>Memoization 2/3</h2>
+	<h2>Memoization</h2>
 
 	<h3>Let's add a cache</h3>
 
-<pre><strong>var userCache = {};</strong>
+<pre><strong>var cache = {};</strong>
 function getUser(id) {
-  <strong>if (id in userCache) {
-    return userCache[id];</strong>
-  }
-  // Fetch Request
-  <strong>userCache[id] = user;</strong>
-  return user;
+	<strong>if (id in cache) {
+		return cache[id];</strong>
+	}
+	// Fetch Request
+	return <strong>cache[id] = user</strong>;
 }</pre>
-
-	<h3>Global variables suck!</h3>
-
-<pre>var getUser = (function () {
-  var userCache = {};
-  return function (id) {
-    // ...
-  };
-})<strong>()</strong>;</pre>
-
 </div>
 
 <div class="slide">
-	<h2>Memoization 3/3</h2>
-<pre>Object.prototype.memoize = function () {
-  var cache = {};
-  var f = this;
+	<h2>Memoization</h2>
 
-  return function (arg) {
-    if (!(arg in cache)) {
-      cache[arg] = f(arg);
-	}
+	<h3>Global variables suck!</h3>
 
-    return cache[arg];
-  };
-};</pre>
+<pre>
+<strong>var getUser = (function () {</strong>
+	var cache = {};
+	<strong>return </strong>function (id) {
+		if (id in cache) {
+			return cache[id];
+		}
+		<strong>// Fetch Request</strong>
+		return cache[id] = user;
+	};
+<strong>})();</strong></pre>
+</div>
+
+<div class="slide">
+	<h2>Memoization</h2>
+
+	<h3>Non-obstrusive</h3>
+
+<pre>
+<strong>function memoize (f) {</strong>
+	var cache = {};
+	return function () {
+		if (<strong>arguments</strong> in cache<span style="color: red;">*</span>) {
+			return cache[arguments];
+		}
+		return cache[arguments] = <strong>f.apply(this, arguments)</strong>;
+	};
+}
+
+<strong>var getUser = memoize(function (id) {
+	// Fetch Request
+	return user;
+});</strong></pre>
+
+<ul>
+	<li><span style="color: red;">*</span> This code is simplified (<code>arguments</code> is not a real array, Elements <code>toString</code> must be unique and not contain any comma <code>,</code>)</li>
+</ul>
+</div>
+
+<div class="slide">
+	<h2>Memoization</h2>
+
+	<h3>Augment Function prototype</h3>
+<pre><strong>Function.prototype.memoize = function () {</strong>
+	var cache = {};
+	<strong>var f = this;</strong>
+	return function () {
+		if (arguments in cache) {
+			return cache[arguments];
+		}
+		return cache[arguments] = f.apply(this, arguments);
+	};
+}
+function getUser (id) {
+	// Fetch Request
+	return user;
+};
+<strong>getUser = getUser.memoize();</strong>
+</pre>
 
 </div>
 

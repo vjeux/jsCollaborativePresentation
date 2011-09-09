@@ -1,7 +1,59 @@
 
-<div class="slide">
-	<h2>Options</h2>
 
+<div class="slide">
+	<h1>Write Less, Do More<br />API Matters</h1>
+</div>
+
+<div class="slide">
+	<h2>Arguments</h2>
+
+	<h3>Polymorphism</h3>
+<pre>
+<strong>// Create HTML Fragment</strong>
+$('&lt;div/>')
+
+<strong>// CSS Query for HTML Element</strong>
+$('input[type=text].username')
+
+<strong>// Augment HTML Element</strong>
+$(username)
+
+<strong>// Augment Multiple HTML Elements</strong>
+$([username, password])</pre>
+
+<ul>
+	<li>jQuery manipulates one or more HTML elements</li>
+	<li>One constructor </li>
+</ul>
+
+</div>
+
+<div class="slide">
+	<h2>Arguments</h2>
+
+	<h3>Expected Features</h3>
+<pre>
+<strong>// Set properties</strong>
+$('&lt;input />', <strong>{type: 'text', class: 'user'}</strong>)
+
+<strong>// Make the search relative</strong>
+$('input[type=text].username', <strong>login_form</strong>)
+
+<strong>// Execute a function when the page is loaded</strong>
+$(function () {
+  // ...
+});</pre>
+
+<ul>
+	<li>Add useful and expected features as optional arguments</li>
+</ul>
+</div>
+
+
+<div class="slide">
+	<h2>Arguments</h2>
+
+	<h3>Default Options</h3>
 <pre>function fooo(options) {
 	options = Object.extend({
 		default: 1,
