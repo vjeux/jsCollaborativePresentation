@@ -1,7 +1,7 @@
 
 <div class="slide">
 
-<h1>I'm not alone! Pluginification?</h1>
+<h1>Module, <br />Namespace?</h1>
 
 </div>
 
@@ -23,6 +23,7 @@
 
 <ul>
 	<li>Load only modules we need: Keep size small.</li>
+	<li>Extension can be written by someone outside the Lib3D project.</li>
 	<li><strong>Next</strong>: What if Lib3D already exists?</li>
 </ul>
 </div>
@@ -51,6 +52,7 @@ function require(filename) {
 
 <ul>
 	<li>Eval is required to process code at runtime.</li>
+	<li><strong>Next:</strong> I don't want to freeze the browser, Asynchronous maybe?</li>
 </ul>
 
 </div>
@@ -64,16 +66,20 @@ function require(filename) {
 });</pre>
 
 <ul>
-	<li>Use callback argument name to avoid name-clash.</li>
+	<li>Use function argument name to avoid name-clash.</li>
 </ul>
 
 <pre>
 function require(filename<strong>, callback</strong>) {
-	downloadAsync(filename, <strong>function (file) {</strong>
+	<strong>downloadAsync</strong>(filename, <strong>function (file) {</strong>
 		<strong>callback(</strong>eval(file));
 	});
 }
 </pre>
+
+<ul>
+	<li><strong>Continuation Passing Style</strong>: Heavy use of callbacks/continuation.</li>
+</ul>
 
 
 </div>

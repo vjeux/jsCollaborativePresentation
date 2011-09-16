@@ -24,13 +24,11 @@ point.print();</pre>
 		<li><strong>Object.create(proto)</strong>: Creates a new object setting the prototype.</li>
 		<li><strong>Next</strong>: Point3D?</li>
 	</ul>
-
-
 </div>
 
 
 <div class="slide">
-	<h2>Chained Inheritance</h2>
+	<h2>Multi-Level Inheritance</h2>
 
 <pre>var Point = {
 	x: 51,
@@ -50,8 +48,8 @@ var point = Object.create(Point3D);</strong>
 point.print();</pre>
 
 	<ul>
-		<li>Object.create can also be used for multi-level inheritance</li>
-		<li><strong>Next</strong>: Annoying extension syntax</li>
+		<li>Object.create can also be used for multi-level inheritance.</li>
+		<li><strong>Next</strong>: Unified syntax.</li>
 	</ul>
 
 </div>
@@ -77,6 +75,11 @@ var Point3D = <strong>Object.extend(</strong>Object.create(Point), <strong>{
 
 var point = Object.create(Point3D);
 point.print();</pre>
+	<ul>
+		<li><strong>Object.extend(base, ext)</strong>: Copies all the <code>ext</code> attributes to <code>base</code>.</li>
+		<li><strong>Next:</strong> Class Framework</li>
+	</ul>
+
 
 </div>
 

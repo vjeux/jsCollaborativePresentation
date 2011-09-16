@@ -1,20 +1,19 @@
+<div class="slide">
+	<h1>Memoization<br />
+	...What!?</h1>
+</div>
 
 <div class="slide">
-	<h2>Memoization</h2>
-
-<h3>Situation</h3>
+	<h2>Situation</h2>
 <ul>
 	<li>Twitter Application</li>
-	<li>Everytime you mouseover a username, a tooltip is displayed with more infos.</li>
+	<li>When you mouseover a username, a tooltip is displayed with more infos.</li>
 </ul>
 
 <pre>username.mouseover(function () {
-	displayTooltip(getUser(username.id));
+	var user = getUser(username.id);
+	displayTooltip(user);
 });</pre>
-
-<ul>
-	<li>You get user informations with an external request.</li>
-</ul>
 
 <pre>function getUser(id) {
 	// Fetch Request (Synchronous only for the example!)
@@ -22,15 +21,15 @@
 }</pre>
 
 <ul>
-	<li>If you mouseover twice the same user, there will be <strong>two</strong> requests!</li>
+
+	<li><strong>Problem:</strong> If you mouseover twice the same user, there will be <strong>two</strong> requests!</li>
+	<li><strong>Solution:</strong> Add a cache.</li>
 </ul>
 
 </div>
 
 <div class="slide">
-	<h2>Memoization</h2>
-
-	<h3>Let's add a cache</h3>
+	<h2>Object as Cache</h2>
 
 <pre><strong>var cache = {};</strong>
 function getUser(id) {
@@ -43,9 +42,7 @@ function getUser(id) {
 </div>
 
 <div class="slide">
-	<h2>Memoization</h2>
-
-	<h3>Global variables suck!</h3>
+	<h2>Self-invoking Function</h2>
 
 <pre>
 <strong>var getUser = (function () {</strong>
@@ -61,15 +58,13 @@ function getUser(id) {
 </div>
 
 <div class="slide">
-	<h2>Memoization</h2>
-
-	<h3>Non-obstrusive</h3>
+	<h2>Non-obstrusive</h2>
 
 <pre>
 <strong>function memoize (f) {</strong>
 	var cache = {};
 	return function () {
-		if (<strong>arguments</strong> in cache<span style="color: red;">*</span>) {
+		if (arguments in cache<span style="color: red;">*</span>) {
 			return cache[arguments];
 		}
 		return cache[arguments] = <strong>f.apply(this, arguments)</strong>;
@@ -82,17 +77,15 @@ function getUser(id) {
 });</strong></pre>
 
 <ul>
-	<li><span style="color: red;">*</span> This code is simplified (<code>arguments</code> is not a real array, Elements <code>toString</code> must be unique and not contain any comma <code>,</code>)</li>
+	<li><span style="color: red;">*</span> This code is simplified <small>(<code>arguments</code> is not a real array, Elements <code>toString</code> must be unique and not contain any comma <code>,</code>)</small></li>
 </ul>
 </div>
 
 <div class="slide">
-	<h2>Memoization</h2>
-
-	<h3>Augment Function prototype</h3>
-<pre><strong>Function.prototype.memoize = function () {</strong>
+	<h2>Augment Function Prototype</h2>
+<pre><strong>Function.prototype.memoize =</strong> function () {
 	var cache = {};
-	<strong>var f = this;</strong>
+	var f = this;
 	return function () {
 		if (arguments in cache) {
 			return cache[arguments];
@@ -107,11 +100,8 @@ function getUser (id) {
 <strong>getUser = getUser.memoize();</strong>
 </pre>
 
+<ul>
+	<li>Every function have Function.prototype as prototype.</li>
+</ul>
+
 </div>
-
-<!--
-
-Private Variables
-Prototype Extending
-
--->

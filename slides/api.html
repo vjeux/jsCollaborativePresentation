@@ -1,0 +1,108 @@
+
+
+<div class="slide">
+	<h1>Write Less, Do More<br />API Matters</h1>
+</div>
+
+
+<div class="slide">
+	<h2>Default Options</h2>
+
+<pre>function fooo(options) {
+	<strong>options = Object.extend({</strong>
+		validate: false,
+		limit: 10
+	<strong>}, options);</strong>
+
+	// Do something with the options
+}
+
+fooo<strong>();</strong>
+fooo<strong>({validate: true});</strong>
+fooo<strong>({validate: true, limit: 20});</strong>
+</pre>
+
+</div>
+
+
+<div class="slide">
+	<h2>Method Chaining</h2>
+
+<pre>function Object() {}
+Object.prototype = {
+  <strong>method: </strong>function () {
+    // Do something
+    <strong>return this;</strong>
+  }
+};
+
+var obj = new Object();
+<strong>obj.method().method();</strong></pre>
+</div>
+
+<div class="slide">
+	<h2>Method Chaining Examples</h2>
+
+<pre><strong style="float: right;">HTML Document Traversing</strong>$('li')        // li: List Item
+  .has('ul')   // ul: Unordered List
+  .eq(1)
+  .parent()</pre>
+
+<pre><strong style="float: right;">SQL Query</strong>SQL.Select()
+  .field('*')
+  .table('users')
+  .limit(10)</pre>
+
+<pre><strong style="float: right;">Asynchronous Tasks</strong>$('&lt;div/>')
+  .fetch('navigation.html') // Asynchronous
+  .addClass('column')
+  .appendTo('#side')</pre>
+</div>
+
+
+
+<div class="slide">
+	<h2>Polymorphism</h2>
+
+<pre><strong style="float: right;">Augment HTML Element</strong>$(username)</pre>
+<pre><strong style="float: right;">Augment Multiple HTML Elements</strong>$([username, password])</pre>
+<pre><strong style="float: right;">Create HTML Fragment</strong>$('&lt;div/>')</pre>
+<pre><strong style="float: right;">CSS Query for HTML Element</strong>$('input[type=text].username')</pre>
+
+<ul>
+	<li>jQuery manipulates one or more HTML elements</li>
+	<li>One constructor </li>
+</ul>
+
+</div>
+
+<div class="slide">
+	<h2>Expected Features</h2>
+
+<pre><strong style="float: right;">Set properties</strong>$('&lt;input/>', <strong>{type: 'text', class: 'user'}</strong>)</pre>
+<pre><strong style="float: right;">Make the search relative</strong>$('input[type=text].username', <strong>login_form</strong>)</pre>
+<pre><strong style="float: right;">Execute function after page load</strong>$(<strong>function</strong> () { /* ... */ });</pre>
+
+<ul>
+	<li>Add useful and expected features as optional arguments</li>
+</ul>
+</div>
+
+
+
+
+<div class="slide">
+	<h2>Keymaster JS</h2>
+
+<pre>key(<strong>'shift + a', 'ctrl + alt + 1'</strong>, function (event, handler) {
+	console.log(handler.shortcut); <strong>// 'shift + a'</strong>
+	console.log(handler.keys); <strong>// {shift: true, a: true}</strong>
+});</pre>
+
+	<ul>
+		<li><strong>Event Driven Programming</strong>: Lambda functions makes it easy to write.</li>
+		<li>Strings are good for introspection</li>
+		<li>Variadic arguments, function as the last argument</li>
+	</ul>
+
+</div>

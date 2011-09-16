@@ -1,54 +1,58 @@
 
-<!-- Author of these slides:
-	Vjeux <vjeuxx@gmail.com> http://blog.vjeux.com/
--->
-
+<div class="slide">
+	<h1>LD_PRELOAD?</h1>
+</div>
 
 <div class="slide">
-	<h2>Hook</h2>
-
-	<h3>Situation</h3>
-	<ul>
-		<li>Game in the browser.</li>
-		<li>For your damage charting extension, you want to watch the combat log.</li>
-		<li>The following code is part of the game:</li>
-	</ul>
+	<h2>Situation</h2>
 
 <pre>function ProcessChatMessage(message, source, channel) {
 	// ... Game Code ...
 }</pre>
 
+	<ul>
+		<li>Game in the browser.</li>
+		<li>For your damage charting extension, you want to watch the combat log.</li>
+		<li><strong>Next:</strong> One solution.</li>
+	</ul>
+
+</div>
+
 <div class="slide">
-	<h3>Ugly hack - Game Patching</h3>
+	<h2>Ugly Hack: Game Patching</h3>
 
 <pre>function ProcessChatMessage(message, source, channel) {
 <strong>	if (channel == COMBAT_LOG_CHANNEL) {
 		// ... Extension Code ...
 	}</strong>
 	// ... Game Code ...
-}</pre></div>
+}</pre>
+
+	<ul>
+		<li>Edit the game files.</li>
+		<li><strong>Next:</strong> Hook technique.</li>
+	</ul>
+
 </div>
 
-<div class="slide">
-	<h2>Hook</h2>
-	<h3>Hook</h3>
-<pre>// 1 - Backup the function
-var <strong>defaultProcessChatMessage = ProcessChatMessage</strong>;
 
-// 2 - Override the function
+<div class="slide">
+	<h2>Hook Technique</h2>
+<pre>var <strong>defaultProcessChatMessage = ProcessChatMessage</strong>;
+
 <strong>ProcessChatMessage = function</strong>(message, source, channel) {
 	if (channel == COMBAT_LOG_CHANNEL) {
 		// ... Extension Code ...
 	}
 
-	// 3 - Call the default code</h3>
 	<strong>defaultProcessChatMessage</strong>(message, source, channel);
 };</pre>
 
 	<ul>
+		<li><strong>Powerful</strong>: You can alter arguments, call the function multiple times.</li>
 		<li>Target function does not need to be written in a special form.</li>
-		<li>Decentralized: Multiple hooks can be added independently.</li>
-		<li>No library required: Uses only basic Javascript.</li>
+		<li><strong>Decentralized</strong>: Multiple hooks can be added independently.</li>
+		<li><strong>No library required</strong>: Uses only basic Javascript.</li>
 	</ul>
 </div>
 
