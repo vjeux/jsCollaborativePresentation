@@ -6,7 +6,7 @@
 <div class="slide">
 	<h2>Javascript Object Notation (JSON)</h2>
 
-	<pre>var point = {x: 51, y: 42};
+	<pre>var point = <strong>{x: 51, y: 42}</strong>;
 console.log(point.x, point.y);</pre>
 
 	<ul>
@@ -17,17 +17,42 @@ console.log(point.x, point.y);</pre>
 </div>
 
 <div class="slide">
-	<h2>Constructor attempt</h2>
+	<h2>Constructor</h2>
+
+<pre><strong>function Point</strong>(x, y) {
+	<strong>return</strong> {
+		x: x,
+		y: y
+	};
+}
+
+var point = Point(51, 42);
+<strong>console.log(point);</strong>
+</pre>
+
+	<ul>
+		<li>Verbose?</li>
+		<li>Debugging!</li>
+		<li><strong>Next:</strong> Add print method.</li>
+	</ul>
+</div>
+
+<div class="slide">
+	<h2>Constructor with Method attempt</h2>
 
 <pre>function Point(x, y) {
 	return {
 		x: x,
 		y: y,
-		print: function () {
+		print: <strong>function () {</strong>
 			console.log(<strong>?????</strong>.x, <strong>?????</strong>.y);
+		}
+	};
+}
 </pre>
 
 	<ul>
+		<li>Functions are first class: they can be used inside an object.</li>
 		<li><strong>Problem:</strong> Cannot self reference.</li>
 		<li><strong>Solution:</strong> Make a temporary variable.</li>
 	</ul>
@@ -35,11 +60,11 @@ console.log(point.x, point.y);</pre>
 
 
 <div class="slide">
-	<h2>Naive Constructor</h2>
+	<h2>Constructor with Method</h2>
 
 <pre>function Point(x, y) {
-	<strong>var point = {};</strong>
-	point.x = x;
+	<strong>var point = {};
+	point.x = x;</strong>
 	point.y = y;
 	point.print = function () {
 		console.log(<strong>point</strong>.x, <strong>point</strong>.y);
@@ -52,7 +77,8 @@ point.print();
 </pre>
 
 	<ul>
-		<li>Does what we want.</li>
+		<li>Objects are mutable. You can add properties after it has been created.</li>
+		<li>Objective Complete: We have class with only Objects and Functions.</li>
 		<li><strong>Next:</strong> Less verbose using <code>new</code> operator.</li>
 	</ul>
 </div>
@@ -96,13 +122,6 @@ point.print();
 	<ul>
 		<li>We use a local variable instead of an object property.</li>
 		<li>As long as the <code>print</code> function lives, the variable <code>y_</code> exists thanks to the <strong>Closure</strong>.</li>
-		<li><strong>Caution:</strong> Technique to use with care:
-			<ul>
-				<li>Harder to debug as we can't inspect local variables.</li>
-				<li>More costly memory-wise to keep the closure.</li>
-				<li>Cannot integrate it with prototypal inheritance (next slide).</li>
-			</ul>
-		</li>
 		<li><strong>Next:</strong> Prototypal Inheritance.</li>
 	</ul>
 </div>
@@ -126,8 +145,7 @@ point.print();
 </pre>
 
 	<ul>
-		<li>Functions are objects, you can add them properties.</li>
-		<li>Functions are objects, you can add them properties.</li>
+		<li>Functions are Objects. You can add them attributes.</li>
 
 		<li><strong>Next:</strong> Prototypal Inheritance.</li>
 	</ul>

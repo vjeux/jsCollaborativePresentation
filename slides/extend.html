@@ -7,18 +7,74 @@
 
 
 <div class="slide">
-	<h2>Object.extend</h2>
+	<h2>Namespace</h2>
 
-<pre>var AwesomeLib = {
-	// ...
-};
-
-Object.extend(AwesomeLib, {
-	attr: 12345,
-	
-	method: function () {
-		// ...
-	}
+<pre><strong style="float: right;">lib3d.js</strong>var Lib3D = { /* ... */ };</pre>
+<pre><strong style="float: right;">lib3d.particle.js</strong><strong>Lib3D.Particle</strong> = { /* ... */ };</pre>
+<pre><strong style="float: right;">lib3d.collada.js</strong><strong>Object.extend</strong>(Lib3D, {
+	ColladaLoader: { /* ... */ }
 });
 </pre>
+<pre><strong style="float: right;">app.html</strong>&lt;script src="lib3d.js">&lt;/script>
+<strong>&lt;script src="lib3d.collada.js">&lt;/script></strong>
+&lt;script><strong>Lib3D.ColladaLoader</strong>.load(...);&lt;/script>
+</pre>
+
+
+<ul>
+	<li>Load only modules we need: Keep size small.</li>
+	<li><strong>Next</strong>: What if Lib3D already exists?</li>
+</ul>
 </div>
+
+
+<div class="slide">
+	<h2>Local Namespace</h2>
+
+<pre><strong style="float: right;">lib3d.js</strong>(function () {
+	return {
+		/* ... */
+	};
+})();</pre>
+<pre><strong style="float: right;">app.js</strong><strong>var Lib3D = require('lib3d.js');</strong></pre>
+
+<ul>
+	<li>Use local variables in order to avoid name-clash.</li>
+</ul>
+
+<pre>
+function require(filename) {
+	var file = download(filename);
+	return <strong>eval</strong>(file);
+}
+</pre>
+
+<ul>
+	<li>Eval is required to process code at runtime.</li>
+</ul>
+
+</div>
+
+
+<div class="slide">
+	<h2>Local Namespace: Asynchronous</h2>
+
+<pre><strong style="float: right;">app.js</strong>require('lib3d.js', <strong>function (Lib3D) {</strong>
+	Lib3D.ColladaLoader.load();
+});</pre>
+
+<ul>
+	<li>Use callback argument name to avoid name-clash.</li>
+</ul>
+
+<pre>
+function require(filename<strong>, callback</strong>) {
+	downloadAsync(filename, <strong>function (file) {</strong>
+		<strong>callback(</strong>eval(file));
+	});
+}
+</pre>
+
+
+</div>
+
