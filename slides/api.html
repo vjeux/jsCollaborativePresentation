@@ -1,20 +1,20 @@
 
 
 <div class="slide">
-	<h1>Write Less, Do More<br />API Matters</h1>
+  <h1>Write Less, Do More<br />API Matters</h1>
 </div>
 
 
 <div class="slide">
-	<h2>Default Options</h2>
+  <h2>Default Options</h2>
 
 <pre>function fooo(options) {
-	<strong>options = Object.extend({</strong>
-		validate: false,
-		limit: 10
-	<strong>}, options);</strong>
+  <strong>options = Object.extend({</strong>
+    validate: false,
+    limit: 10
+  <strong>}, options);</strong>
 
-	// Do something with the options
+  // Do something with the options
 }
 
 fooo<strong>();</strong>
@@ -26,22 +26,32 @@ fooo<strong>({validate: true, limit: 20});</strong>
 
 
 <div class="slide">
-	<h2>Method Chaining</h2>
+  <h2>Method Chaining</h2>
 
-<pre>function Object() {}
-Object.prototype = {
+<h3>Example</h3>
+<pre>
+$('&lt;input&gt;')
+	.addClass('username')
+	.val('Username')
+	.click(function () { /* ... */ })
+	.appendTo(login_form);
+</pre>
+
+<h3>Implementation</h3>
+<pre>function Fooo() {}
+Fooo.prototype = {
   <strong>method: </strong>function () {
     // Do something
     <strong>return this;</strong>
   }
 };
 
-var obj = new Object();
+var obj = new Fooo();
 <strong>obj.method().method();</strong></pre>
 </div>
 
 <div class="slide">
-	<h2>Method Chaining Examples</h2>
+  <h2>Method Chaining Examples</h2>
 
 <pre><strong style="float: right;">HTML Document Traversing</strong>$('li')        // li: List Item
   .has('ul')   // ul: Unordered List
@@ -62,7 +72,7 @@ var obj = new Object();
 
 
 <div class="slide">
-	<h2>Polymorphism</h2>
+  <h2>Polymorphism</h2>
 
 <pre><strong style="float: right;">Augment HTML Element</strong>$(username)</pre>
 <pre><strong style="float: right;">Augment Multiple HTML Elements</strong>$([username, password])</pre>
@@ -70,21 +80,21 @@ var obj = new Object();
 <pre><strong style="float: right;">CSS Query for HTML Element</strong>$('input[type=text].username')</pre>
 
 <ul>
-	<li>jQuery manipulates one or more HTML elements</li>
-	<li>One constructor </li>
+  <li>jQuery manipulates one or more HTML elements</li>
+  <li>One constructor </li>
 </ul>
 
 </div>
 
 <div class="slide">
-	<h2>Expected Features</h2>
+  <h2>Expected Features</h2>
 
 <pre><strong style="float: right;">Set properties</strong>$('&lt;input/>', <strong>{type: 'text', class: 'user'}</strong>)</pre>
 <pre><strong style="float: right;">Make the search relative</strong>$('input[type=text].username', <strong>login_form</strong>)</pre>
 <pre><strong style="float: right;">Execute function after page load</strong>$(<strong>function</strong> () { /* ... */ });</pre>
 
 <ul>
-	<li>Add useful and expected features as optional arguments</li>
+  <li>Add useful and expected features as optional arguments</li>
 </ul>
 </div>
 
@@ -92,17 +102,154 @@ var obj = new Object();
 
 
 <div class="slide">
-	<h2>Keymaster JS</h2>
+  <h2><a href="https://github.com/madrobby/keymaster">Keymaster</a></h2>
 
-<pre>key(<strong>'shift + a', 'ctrl + alt + 1'</strong>, function (event, handler) {
-	console.log(handler.shortcut); <strong>// 'shift + a'</strong>
-	console.log(handler.keys); <strong>// {shift: true, a: true}</strong>
+<pre>key(<strong>'shift + a', '&#x2318; + alt + 1'</strong>, function (event, handler) {
+  console.log(handler.shortcut); <strong>// 'shift + a'</strong>
+  console.log(handler.keys); <strong>// {shift: true, a: true}</strong>
 });</pre>
 
-	<ul>
-		<li><strong>Event Driven Programming</strong>: Lambda functions makes it easy to write.</li>
-		<li>Strings are good for introspection</li>
-		<li>Variadic arguments, function as the last argument</li>
-	</ul>
+  <ul>
+    <li><strong>Event Driven Programming</strong>: Lambda functions makes it easy to write.</li>
+    <li>Strings are good for introspection.</li>
+    <li>Variadic arguments, continuation as the last argument.</li>
+  </ul>
+
+</div>
+
+<div class="slide">
+  <h2><a href="https://github.com/Gozala/styleless">Styleless</a></h2>
+
+<h3>Variables</h3>
+<table><tr><td>
+<pre><strong>var color = '#4D926F'</strong>
+Style({
+  '#header': { 
+    color: <strong>color</strong>
+  },
+  h2: {
+    color: <strong>color</strong>
+  }
+})
+</pre></td><td><pre>
+#header {
+  color: <strong>#4D926F</strong>;
+}
+h2 {
+  color: <strong>#4D926F</strong>;
+}
+</pre></td></tr></table>
+</div>
+
+<div class="slide">
+  <h2><a href="https://github.com/Gozala/styleless">Styleless</a></h2>
+
+<h3>Functions</h3>
+<table><tr><td><pre>
+<strong>function roundedCorners(radius) {
+  return {
+    'border-radius': radius,
+    '-webkit-border-radius': radius,
+    '-moz-border-radius': radius
+  }
+}</strong>
+Style({
+  '#header': Style(<strong>roundedCorners('15px')</strong>, {
+    color: 'red'
+  })
+})
+</pre></td><td><pre>
+#header {
+<strong>  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;</strong>
+  color: red;
+}
+</pre></td></tr></table>
+</div>
+
+<!--
+<div class="slide">
+  <h2><a href="https://github.com/Gozala/styleless">Styleless</a></h2>
+
+<h3>Nested Rules</h3>
+<table><tr><td><pre>
+Style({
+  <strong>'#header': {</strong>
+    <strong>p: {</strong>
+      'font-size': '12px',
+      <strong>a: {</strong>
+        'text-decoration': 'none',
+        <strong>':hover': {</strong>
+          'border-width': '1px'
+        }
+      }
+    }
+  }
+})
+</pre></td><td><pre>
+#header p {
+  font-size: 12px;
+}
+#header p a {
+  text-decoration: none;
+}
+<strong>#header p a:hover</strong> {
+  border-width: 1px;
+}</pre></td></tr></table>
+
+</div>
+-->
+
+<div class="slide">
+  <h2>Pattern Matching with <a href="http://fitzgen.github.com/wu.js/#wu-match">wu.match</a></h2>
+
+
+<h3>Caml</h3>
+<pre>
+let rec map f list =
+  match list with
+      <strong>[]</strong>         -> <strong>[]</strong>
+    | head::tail -> <strong>f(head) :: map f tail</strong>
+</pre>
+
+<h3>Javascript</h3>
+
+<pre>
+function map(f, list) {
+  return match(list,
+    [ <strong>[]</strong> ]   , <strong>[]</strong>,
+    [ Array ], function (arr) {
+      var head = arr[0], tail = arr.splice(1);
+	  return [<strong>f(head)</strong>].<strong>concat</strong>(<strong>map(f, tail)</strong>);
+    }
+  );
+}
+
+map(function (n) { return n * n; }, [1, 2, 3, 4])
+>> [1, 4, 9, 16]
+</pre>
+</div>
+
+
+<div class="slide">
+  <h2>Pattern Matching with <a href="http://fitzgen.github.com/wu.js/#wu-match">wu.match</a></h2>
+
+<h3>CoffeeScript</h3>
+
+<pre>
+map = (f, list) ->
+  match list, 
+    [ <strong>[]</strong> ]   , <strong>[]</strong>,
+    [ Array ], (<strong>head, tail...</strong>) -> <strong>[f head].concat map f, tail</strong>
+</pre>
+
+<h3>Caml</h3>
+<pre>
+let rec map f list =
+  match list with
+      <strong>[]</strong>         -> <strong>[]</strong>
+    | <strong>head::tail</strong> -> <strong>f(head) :: map f tail</strong>
+</pre>
 
 </div>
